@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="Cucumber" time="46.859" tests="1" skipped="0" failures="0" errors="0">
+<testcase classname="PIM" name="Add emp" time="46.749">
+<system-out><![CDATA[
+Given Launch URL............................................................passed
+When Login to HRM...........................................................passed
+When Navigate to Add Employee...............................................passed
+And Add emp Details.........................................................passed
+And Save emp................................................................passed
+And Navigate to PIM emp list................................................passed
+And Search emp by emp ID....................................................passed
+Then Validate Emp is created................................................passed
+]]></system-out>
+</testcase>
+</testsuite>

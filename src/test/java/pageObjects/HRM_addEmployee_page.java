@@ -45,8 +45,8 @@ public class HRM_addEmployee_page
 	{
 		saveButton.click();
 		Thread.sleep(5000);
-		String ID=empID.getText();
-		System.out.println("--->"+ID);
-		Thread.sleep(5000);
+//		String ID=empID.getText();
+//		System.out.println("--->"+ID);
+//		Thread.sleep(5000);
 	}
 }

@@ -1,5 +1,12 @@
 package stepDefination;
 
+import java.io.IOException;
+
+import org.apache.poi.EncryptedDocumentException;
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
+import org.testng.Assert;
+import org.testng.Reporter;
+
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -8,6 +15,7 @@ import pageObjects.HRM_EmployeeList_page;
 import pageObjects.HRM_addEmployee_page;
 import pageObjects.HRM_dashboard_page;
 import pageObjects.HRM_login_page;
+import utility.Utility;
 
 public class AddEmpSteps extends HRM_BaseClass
 {
@@ -45,14 +53,17 @@ public class AddEmpSteps extends HRM_BaseClass
 	}
 
 	@When("Add emp Details")
-	public void add_emp_details() throws InterruptedException 
+	public void add_emp_details() throws InterruptedException, EncryptedDocumentException, IOException, InvalidFormatException 
 	{
 		Thread.sleep(3000);
 		 String str=RandomString.make(5);
-		 FN="Test"+str;
+		 String FirstName = Utility.excelRead("Sheet1", 0, 0);
+		 FN=FirstName+str;
 		addEmployee_page.EnterFirstName(FN);
 		addEmployee_page.EnterMiddleName("MN");
-		addEmployee_page.EnterLastName("LastName");
+		 String lastName = Utility.excelRead("Sheet1", 0, 1);
+
+		addEmployee_page.EnterLastName(lastName);
 		addEmployee_page.EnterEmpID();
 	}
 
@@ -81,7 +92,18 @@ public class AddEmpSteps extends HRM_BaseClass
 	}
 
 	@Then("Validate Emp is created")
-	public void validate_emp_is_created() {
-	  
+	public void validate_emp_is_created() throws IOException, InterruptedException 
+	{
+//		System.out.println(employeeList_page.getEmpNameFromTable(driver));
+		if(employeeList_page.getEmpNameFromTable(driver).contains(FN))
+		{
+			System.out.println("Emp is created");
+			Reporter.log("Emp is created");
+		}
+		else 
+		{
+			Assert.fail();
+		}
+		driver.quit();
 	}	
 }

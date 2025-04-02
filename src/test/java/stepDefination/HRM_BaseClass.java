@@ -13,6 +13,7 @@ public class HRM_BaseClass
 		WebDriverManager.chromedriver().setup();
 		driver=new ChromeDriver();
 		driver.get("https://opensource-demo.orangehrmlive.com/");
+		driver.manage().window().maximize();
 	}
 
 }
